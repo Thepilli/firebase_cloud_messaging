@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_cloud_messaging/constants/text_strings.dart';
 import 'package:firebase_cloud_messaging/features/auth/controllers/helper_controller.dart';
 import 'package:firebase_cloud_messaging/features/auth/models/user__model.dart';
@@ -8,11 +9,17 @@ class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
   final _db = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
 
 //Store user in Firestore
   Future<void> createUser(UserModel user) async {
     try {
-      await _db.collection('Users').add(user.toJson());
+      final userCredential = await _auth.signInWithEmailAndPassword(email: user.email, password: user.password);
+      final uid = userCredential.user?.uid;
+
+      // await _db.collection('Users').add(user.toJson());
+      await _db.collection('Users').doc(uid).set(user.toJson());
+
       Helper.successSnackBar(title: 'Success', message: 'User created successfully');
     } catch (e) {
       Helper.errorSnackBar(title: tOhSnap, message: e.toString());

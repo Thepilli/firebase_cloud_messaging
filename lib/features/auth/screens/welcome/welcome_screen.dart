@@ -20,6 +20,7 @@ class WelcomeScreen extends StatelessWidget {
 
     // sign in anonymously
     await FirebaseAuth.instance.signInAnonymously();
+    print(FirebaseAuth.instance.currentUser);
     await Get.to(() => Dashboard());
 
     // pop loading circle

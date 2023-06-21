@@ -42,7 +42,9 @@ class AuthenticationRepository extends GetxController {
         ? Get.offAll(() => const WelcomeScreen())
         : user.emailVerified
             ? Get.offAll(() => Dashboard())
-            : Get.offAll(() => MailVerification());
+            : user.isAnonymous
+                ? Get.offAll(() => Dashboard())
+                : Get.offAll(() => MailVerification());
   }
 
   ///----------------------------------------- Email & Password sign-in ----------------------------------------
