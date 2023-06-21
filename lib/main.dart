@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_cloud_messaging/features/auth/screens/welcome/welcome_screen.dart';
 import 'package:firebase_cloud_messaging/firebase_options.dart';
+import 'package:firebase_cloud_messaging/repository/auth_repository/authentication_repository.dart';
 import 'package:firebase_cloud_messaging/utils/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'repository/auth_repository/authentication_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,8 +36,8 @@ class MyApp extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.leftToRightWithFade,
-      transitionDuration: Duration(milliseconds: 500),
+      // defaultTransition: Transition.leftToRightWithFade,
+      // transitionDuration: Duration(milliseconds: 500),
       home: WelcomeScreen(),
     );
   }

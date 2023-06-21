@@ -11,6 +11,8 @@ class LoginController extends GetxController {
   final showPassword = false.obs;
   final email = TextEditingController();
   final password = TextEditingController();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   /// Loader

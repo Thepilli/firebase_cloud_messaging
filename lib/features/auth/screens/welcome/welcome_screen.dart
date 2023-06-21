@@ -9,9 +9,21 @@ import 'package:firebase_cloud_messaging/features/auth/screens/signup/signup_scr
 import 'package:flutter/material.dart';
 import 'package:firebase_cloud_messaging/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:firebase_cloud_messaging/features/core/dashboard/dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
+  // anonymous sign-in function
+  void loginAnonym() async {
+    // show loading circle
+
+    // sign in anonymously
+    await FirebaseAuth.instance.signInAnonymously();
+    await Get.to(() => Dashboard());
+
+    // pop loading circle
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +85,27 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Wanna give it a try?',
+                        style: TextStyle(
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      GestureDetector(
+                        onTap: loginAnonym,
+                        child: const Text('Continue anonymously',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
